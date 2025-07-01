@@ -1,76 +1,30 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f2f2f2;
-  margin: 0;
-  padding: 0;
-}
+function addTask() {
+  const taskInput = document.getElementById("taskInput");
+  const taskText = taskInput.value.trim();
 
-.container {
-  max-width: 400px;
-  margin: 80px auto;
-  padding: 30px;
-  background: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
+  if (taskText === "") {
+    alert("Please enter a task!");
+    return;
+  }
 
-h1 {
-  text-align: center;
-  color: #333;
-}
+  const li = document.createElement("li");
+  li.textContent = taskText;
 
-.input-group {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
+  li.addEventListener("click", function () {
+    li.classList.toggle("completed");
+  });
 
-input[type="text"] {
-  flex: 1;
-  padding: 10px;
-  font-size: 16px;
-}
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+  deleteBtn.className = "delete-btn";
 
-button {
-  padding: 10px 15px;
-  margin-left: 10px;
-  background: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
+  deleteBtn.addEventListener("click", function () {
+    li.remove();
+  });
 
-button:hover {
-  background: #45a049;
-}
+  li.appendChild(deleteBtn);
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  background: #eee;
-  margin-bottom: 10px;
-  padding: 10px;
-  font-size: 16px;
-  display: flex;
-  justify-content: space-between;
-  border-radius: 5px;
-}
-
-li.completed {
-  text-decoration: line-through;
-  color: gray;
-}
-
-.delete-btn {
-  background: red;
-  color: white;
-  border: none;
-  padding: 5px 8px;
-  border-radius: 5px;
-  cursor: pointer;
+  document.getElementById("taskList").appendChild(li);
+  taskInput.value = "";
 }
 
